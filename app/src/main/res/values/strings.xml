@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">DomPortal</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="off">已断开</string>
+    <string name="on">已连接</string>
+    <string name="capturetips">触碰可更新验证码</string>
+
+    <string name="soft_update_no">1.0.1</string>
+    <string name="soft_update_title">Update DomPortal</string>
+    <string name="soft_update_info">Update DomPortal ...ing</string>
+    <string name="soft_updating">Updating</string>
+    <string name="soft_update_updatebtn">soft update updatebtn</string>
+    <string name="soft_update_later">Update Later</string>
+
+
+</resources>
