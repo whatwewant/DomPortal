@@ -19,7 +19,7 @@ import java.net.URL;
  */
 public class CheckForUpdate {
     private static String APK_URL = "https://github.com/whatwewant/qdu_edu_cn_client_for_android/raw/master/app/app.apk";
-    private static String VERSION_URL = "https://raw.githubusercontent.com/whatwewant/qdu_edu_cn_client_for_android/master/app/src/main/java/Service/CheckForUpdate.java";
+    private static String VERSION_URL = "https://raw.githubusercontent.com/whatwewant/DomPortal/master/app/src/main/java/Service/CheckForUpdate.java";
 
     public static int big = 1;
     public static int release = 0;
