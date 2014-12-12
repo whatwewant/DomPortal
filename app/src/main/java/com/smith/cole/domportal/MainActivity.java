@@ -93,6 +93,7 @@ public class MainActivity extends ActionBarActivity {
         ip = (TextView)findViewById(R.id.ip);
 
         checkForUpdate = (TextView)findViewById(R.id.checkForUpdate);
+        checkForUpdate.setText("Version " + VERSION + "(检查更新)");
         checkForUpdateHandler = new CheckForUpdateHandler();
         checkForUpdate.setOnClickListener(new View.OnClickListener() {
             @Override

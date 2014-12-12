@@ -23,18 +23,18 @@ public class CheckForUpdate {
 
     public static int big = 1;
     public static int release = 0;
-    public static int bug = 0;
+    public static int bug = 1;
 
-    public static String VERSION = "1.0.0";
+    public static String VERSION = "1.0.1";
     private static String newVersion;
 
     public static String get_newest_version() {
         String httpResult = new MyHttpClient().get(VERSION_URL);
-        String current_reg = "public static String QDU_EDU_CN_VERSION = \"(.+)\";";
+        String current_reg = "public static String VERSION = \"(.+)\";";
         String regexResult = LoginStatusRegex.regexHtml(httpResult, current_reg);
         if (regexResult == null)
             return "不存在";
-        return regexResult.replaceAll("public static String QDU_EDU_CN_VERSION = \"", "")
+        return regexResult.replaceAll("public static String VERSION = \"", "")
                 .replaceAll("\";", "");
     }
 
