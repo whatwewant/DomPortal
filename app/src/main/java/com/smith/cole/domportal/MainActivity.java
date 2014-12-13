@@ -332,7 +332,7 @@ public class MainActivity extends ActionBarActivity {
                 loginStatus.setChecked(true);
                 loginStatus.setText(R.string.on);
 
-                ip.setText(GetLocalIP.getLocalIpAddress(getApplicationContext()));
+                ip.setText(GetLocalIP.getLocalIpAddress(MainActivity.this));
                 return ;
             }
 
@@ -440,7 +440,7 @@ public class MainActivity extends ActionBarActivity {
                 loginStatus.setChecked(true);
                 loginStatus.setText(R.string.on);
                 captureCode.setHint(R.string.on);
-                ip.setText(GetLocalIP.getLocalIpAddress(getApplicationContext()));
+                ip.setText(GetLocalIP.getLocalIpAddress(MainActivity.this));
                 return ;
             }
         }
