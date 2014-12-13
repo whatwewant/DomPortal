@@ -21,11 +21,11 @@ public class CheckForUpdate {
     private static String APK_URL = "https://github.com/whatwewant/DomPortal/raw/master/app/app-release.apk";
     private static String VERSION_URL = "https://raw.githubusercontent.com/whatwewant/DomPortal/master/app/src/main/java/Service/CheckForUpdate.java";
 
-    public static int big = 1;
-    public static int release = 0;
-    public static int bug = 13;
+    public static String VERSION = "1.0.14";
+    public static int big = Integer.parseInt(VERSION.replace("\"", "").split("\\.")[0]);
+    public static int release = Integer.parseInt(VERSION.replace("\"", "").split("\\.")[1]);
+    public static int bug = Integer.parseInt(VERSION.replace("\"", "").split("\\.")[2]);
 
-    public static String VERSION = "1.0.13";
     private static String newVersion;
 
     public static String get_newest_version() {
