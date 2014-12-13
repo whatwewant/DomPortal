@@ -158,7 +158,7 @@ public class MainActivity extends ActionBarActivity {
         Timer timer = new Timer(true);
         timer.schedule(task, 1000, 3000);
 
-        new CheckForUpdateThread(1).start();
+        new CheckForUpdateThread(3).start();
     }
 
     @Override
@@ -324,6 +324,31 @@ public class MainActivity extends ActionBarActivity {
                 }
             } else if (msg.what == 2) {
                 installAPK((File)msg.obj);
+            } else if (msg.what == 3) {
+                String message = (String)msg.obj;
+                if (message == null) {
+                    return ;
+                }
+
+
+                if (message.contains("检测到新版本")) {
+                    new AlertDialog.Builder(MainActivity.this)
+                            .setTitle(R.string.app_name)
+                            .setMessage(message + ", 是否更新?")
+                            .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    Toast.makeText(MainActivity.this, "更新中...", Toast.LENGTH_SHORT).show();
+                                    new CheckForUpdateThread(2).start();
+                                }
+                            })
+                            .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    Toast.makeText(MainActivity.this, "取消更新", Toast.LENGTH_SHORT).show();
+                                }
+                            }).show();
+                }
             }
         }
     }
