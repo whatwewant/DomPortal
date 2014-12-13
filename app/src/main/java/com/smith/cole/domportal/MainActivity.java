@@ -92,6 +92,13 @@ public class MainActivity extends ActionBarActivity {
         error = (TextView)findViewById(R.id.error);
         ip = (TextView)findViewById(R.id.ip);
 
+        ip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, GetLocalIP.getLocalIpAddress(MainActivity.this), Toast.LENGTH_SHORT).show();
+            }
+        });
+
         checkForUpdate = (TextView)findViewById(R.id.checkForUpdate);
         checkForUpdate.setText("Version " + VERSION + "(检查更新)");
         checkForUpdateHandler = new CheckForUpdateHandler();
