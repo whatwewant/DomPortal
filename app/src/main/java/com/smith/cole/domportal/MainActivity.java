@@ -1,6 +1,7 @@
 package com.smith.cole.domportal;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,6 +22,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -76,6 +78,8 @@ public class MainActivity extends ActionBarActivity {
 
     // Store Or Get Data
     private StoreOrGetData dataImplement;
+
+    private ProgressDialog progressDialog;
 
     /**
      * Initalize widgets
@@ -222,6 +226,7 @@ public class MainActivity extends ActionBarActivity {
                         loginStatusHandler.sendMessage(msg);
                     }
                 }.start();
+                progressDialog = ProgressDialog.show(MainActivity.this, "请稍候", "正在登入...", true, true);
             }
         });
 
@@ -373,6 +378,8 @@ public class MainActivity extends ActionBarActivity {
     class LoginStatusHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
+            progressDialog.dismiss();
+
             if (msg.what == 0) {
                 Toast.makeText(getApplicationContext(), "您已经登陆成功!", Toast.LENGTH_SHORT).show();
                 alreadyLogin = true;
