@@ -30,6 +30,9 @@ public class LoginStatusRegex {
     }
 
     public static String regexHtml(String html, String regex) {
+        if (html == null)
+            return null;
+
         Pattern pattern = Pattern.compile(regex);
 
         Matcher matcher = pattern.matcher(html);
