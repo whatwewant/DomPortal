@@ -1,10 +1,12 @@
 package com.smith.cole.domportal;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
@@ -95,7 +97,7 @@ public class MainActivity extends ActionBarActivity {
         ip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, GetLocalIP.getLocalIpAddress(MainActivity.this), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, GetLocalIP.getLocalIpAddress((WifiManager)getSystemService(Context.WIFI_SERVICE)), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -339,7 +341,7 @@ public class MainActivity extends ActionBarActivity {
                 loginStatus.setChecked(true);
                 loginStatus.setText(R.string.on);
 
-                ip.setText(GetLocalIP.getLocalIpAddress(MainActivity.this));
+                ip.setText(GetLocalIP.getLocalIpAddress((WifiManager)getSystemService(Context.WIFI_SERVICE)));
                 return ;
             }
 
@@ -447,7 +449,7 @@ public class MainActivity extends ActionBarActivity {
                 loginStatus.setChecked(true);
                 loginStatus.setText(R.string.on);
                 captureCode.setHint(R.string.on);
-                ip.setText(GetLocalIP.getLocalIpAddress(MainActivity.this));
+                ip.setText(GetLocalIP.getLocalIpAddress((WifiManager)getSystemService(Context.WIFI_SERVICE)));
                 return ;
             }
         }
