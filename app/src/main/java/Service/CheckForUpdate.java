@@ -1,9 +1,11 @@
 package Service;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 
+import com.smith.cole.domportal.MainActivity;
 import com.smith.cole.domportal.R;
 
 import java.io.File;
@@ -21,12 +23,12 @@ public class CheckForUpdate {
     private static String APK_URL = "https://github.com/whatwewant/DomPortal/raw/master/app/app-release.apk";
     private static String VERSION_URL = "https://raw.githubusercontent.com/whatwewant/DomPortal/master/app/src/main/java/Service/CheckForUpdate.java";
 
-    public static String VERSION = "1.0.15";
+    public static String VERSION = "1.0.16";
     public static int big = Integer.parseInt(VERSION.replace("\"", "").split("\\.")[0]);
     public static int release = Integer.parseInt(VERSION.replace("\"", "").split("\\.")[1]);
     public static int bug = Integer.parseInt(VERSION.replace("\"", "").split("\\.")[2]);
 
-    private static String newVersion;
+    private static String newVersion = VERSION;
 
     public static String get_newest_version() {
         String httpResult = new MyHttpClient().get(VERSION_URL);
@@ -36,6 +38,24 @@ public class CheckForUpdate {
             return "不存在";
         return regexResult.replaceAll("public static String VERSION = \"", "")
                 .replaceAll("\";", "");
+    }
+
+    public static String get_newest_version_string() {
+        return newVersion;
+    }
+
+    public static void set_do_update(Context context) {
+        new StoreOrGetData(context).set_do_update(newVersion);
+    }
+
+    public static String get_do_update(Context context) {
+        return new StoreOrGetData(context).get_do_update();
+    }
+
+    public static boolean same_newest_version(Context context) {
+        if (get_do_update(context) == null)
+            return false;
+        return get_do_update(context).equals(newVersion);
     }
 
     public static String check() {

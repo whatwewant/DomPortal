@@ -59,23 +59,23 @@ public class StoreOrGetData {
         return data;
     }
 
-    public void set_do_update(boolean update) {
+    public void set_do_update(String version) {
         HashMap<String, String> data = new HashMap<String, String>();
         if (sharedPreferences == null) {
             return ;
         }
 
-        editor.putBoolean("update", update);
+        editor.putString("update_version", version);
         // 确认保存
         editor.commit();
     }
 
-    public boolean get_do_update() {
+    public String get_do_update() {
         HashMap<String, String> data = new HashMap<String, String>();
         if (sharedPreferences == null) {
-            return true;
+            return null;
         }
 
-        return sharedPreferences.getBoolean("update", true);
+        return sharedPreferences.getString("update_version", null);
     }
 }

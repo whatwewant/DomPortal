@@ -81,7 +81,6 @@ public class MainActivity extends ActionBarActivity {
      * Initalize widgets
      * */
     private void init() {
-
         loginStatus = (Switch)findViewById(R.id.loginStatus);
         alreadyLogin = false;
         loginStatus.setChecked(false);
@@ -159,6 +158,7 @@ public class MainActivity extends ActionBarActivity {
         timer.schedule(task, 1000, 3000);
 
         new CheckForUpdateThread(3).start();
+
     }
 
     @Override
@@ -324,7 +324,7 @@ public class MainActivity extends ActionBarActivity {
                 }
             } else if (msg.what == 2) {
                 installAPK((File)msg.obj);
-            } else if (msg.what == 3 && dataImplement.get_do_update()) {
+            } else if (msg.what == 3 && ! CheckForUpdate.same_newest_version(getApplicationContext())) {
                 String message = (String)msg.obj;
                 if (message == null) {
                     return ;
@@ -345,7 +345,7 @@ public class MainActivity extends ActionBarActivity {
                             .setNeutralButton("不更新该版本", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    dataImplement.set_do_update(false);
+                                    CheckForUpdate.set_do_update(getApplicationContext());
                                 }
                             })
                             .setNegativeButton("取消", new DialogInterface.OnClickListener() {
