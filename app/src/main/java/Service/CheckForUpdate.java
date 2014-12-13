@@ -23,9 +23,9 @@ public class CheckForUpdate {
 
     public static int big = 1;
     public static int release = 0;
-    public static int bug = 7;
+    public static int bug = 8;
 
-    public static String VERSION = "1.0.7";
+    public static String VERSION = "1.0.8";
     private static String newVersion;
 
     public static String get_newest_version() {

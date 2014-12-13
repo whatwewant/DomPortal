@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.os.Message;
@@ -27,6 +28,9 @@ import android.widget.Toast;
 import org.w3c.dom.Text;
 
 import java.io.File;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -97,7 +101,7 @@ public class MainActivity extends ActionBarActivity {
         ip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, GetLocalIP.getLocalIpAddress(MainActivity.this), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, getLocalIpAddress(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -341,7 +345,7 @@ public class MainActivity extends ActionBarActivity {
                 loginStatus.setChecked(true);
                 loginStatus.setText(R.string.on);
 
-                ip.setText(GetLocalIP.getLocalIpAddress(MainActivity.this));
+                ip.setText(getLocalIpAddress());
                 return ;
             }
 
@@ -449,7 +453,7 @@ public class MainActivity extends ActionBarActivity {
                 loginStatus.setChecked(true);
                 loginStatus.setText(R.string.on);
                 captureCode.setHint(R.string.on);
-                ip.setText(GetLocalIP.getLocalIpAddress(MainActivity.this));
+                ip.setText(getLocalIpAddress());
                 return ;
             }
         }
@@ -495,6 +499,24 @@ public class MainActivity extends ActionBarActivity {
         username.setText(data.get("username"));
         password.setText(data.get("password"));
         save.setChecked(data.get("save").equals("true"));
+    }
+
+    private String getLocalIpAddress() {
+        WifiManager wifiManager = (WifiManager)getSystemService(Context.WIFI_SERVICE);
+        // 判断Wifi是否开启
+        // wifiManager.isWifiEnabled();
+
+        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+        int ipAddress = wifiInfo.getIpAddress();
+        return intToIp(ipAddress);
+    }
+
+    private String intToIp(int i) {
+
+        return (i & 0xFF ) + "." +
+                ((i >> 8 ) & 0xFF) + "." +
+                ((i >> 16 ) & 0xFF) + "." +
+                ( i >> 24 & 0xFF) ;
     }
 
     @Override
