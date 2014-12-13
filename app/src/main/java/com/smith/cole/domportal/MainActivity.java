@@ -106,7 +106,7 @@ public class MainActivity extends ActionBarActivity {
         });
 
         checkForUpdate = (TextView)findViewById(R.id.checkForUpdate);
-        checkForUpdate.setText("Version " + VERSION + "(检查更新)");
+        checkForUpdate.setText("Version " + VERSION);
         checkForUpdateHandler = new CheckForUpdateHandler();
         checkForUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -157,6 +157,8 @@ public class MainActivity extends ActionBarActivity {
         };
         Timer timer = new Timer(true);
         timer.schedule(task, 1000, 3000);
+
+        new CheckForUpdateThread(3).start();
     }
 
     @Override
@@ -280,9 +282,10 @@ public class MainActivity extends ActionBarActivity {
             msg.what = choice;
             if (choice == 1) {// 检测更新
                 msg.obj = CheckForUpdate.check();
-            }
-            else if (choice == 2) {
+            } else if (choice == 2) {
                 msg.obj = CheckForUpdate.update();
+            } else if (choice == 3) {
+                msg.obj = CheckForUpdate.checkSilent();
             }
             checkForUpdateHandler.sendMessage(msg);
         }

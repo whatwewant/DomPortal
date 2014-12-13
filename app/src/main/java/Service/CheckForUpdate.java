@@ -23,9 +23,9 @@ public class CheckForUpdate {
 
     public static int big = 1;
     public static int release = 0;
-    public static int bug = 9;
+    public static int bug = 10;
 
-    public static String VERSION = "1.0.9";
+    public static String VERSION = "1.0.10";
     private static String newVersion;
 
     public static String get_newest_version() {
@@ -55,6 +55,26 @@ public class CheckForUpdate {
         }
         catch (Exception e) {
             return "检测失败";
+        }
+    }
+
+    public static String checkSilent() {
+        newVersion = get_newest_version();
+
+        try {
+            int bigRelease = Integer.parseInt(newVersion.split("\\.")[0]);
+            int releaseNum = Integer.parseInt(newVersion.split("\\.")[1]);
+            int smallBug = Integer.parseInt(newVersion.split("\\.")[2]);
+
+            if (bigRelease > big ||
+                    (bigRelease==big && releaseNum>release) ||
+                    (big==bigRelease && release==releaseNum && smallBug>bug)) {
+                return ("检测到新版本: Version " + newVersion);
+            }
+            return null;
+        }
+        catch (Exception e) {
+            return null;
         }
     }
 
