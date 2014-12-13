@@ -158,7 +158,7 @@ public class MainActivity extends ActionBarActivity {
         Timer timer = new Timer(true);
         timer.schedule(task, 1000, 3000);
 
-        new CheckForUpdateThread(3).start();
+        new CheckForUpdateThread(1).start();
     }
 
     @Override
@@ -304,7 +304,7 @@ public class MainActivity extends ActionBarActivity {
 
                 if (message.contains("检测到新版本")) {
                     new AlertDialog.Builder(MainActivity.this)
-                            .setTitle("QDU_EDU_CN Client")
+                            .setTitle(R.string.app_name)
                             .setMessage(message + ", 是否更新?")
                             .setPositiveButton("确认", new DialogInterface.OnClickListener() {
                                 @Override
