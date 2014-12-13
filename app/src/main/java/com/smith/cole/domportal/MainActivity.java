@@ -324,7 +324,7 @@ public class MainActivity extends ActionBarActivity {
                 }
             } else if (msg.what == 2) {
                 installAPK((File)msg.obj);
-            } else if (msg.what == 3) {
+            } else if (msg.what == 3 && dataImplement.get_do_update()) {
                 String message = (String)msg.obj;
                 if (message == null) {
                     return ;
@@ -340,6 +340,12 @@ public class MainActivity extends ActionBarActivity {
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     Toast.makeText(MainActivity.this, "更新中...", Toast.LENGTH_SHORT).show();
                                     new CheckForUpdateThread(2).start();
+                                }
+                            })
+                            .setNeutralButton("不更新该版本", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dataImplement.set_do_update(false);
                                 }
                             })
                             .setNegativeButton("取消", new DialogInterface.OnClickListener() {

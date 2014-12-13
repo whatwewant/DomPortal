@@ -58,4 +58,24 @@ public class StoreOrGetData {
 
         return data;
     }
+
+    public void set_do_update(boolean update) {
+        HashMap<String, String> data = new HashMap<String, String>();
+        if (sharedPreferences == null) {
+            return ;
+        }
+
+        editor.putBoolean("update", update);
+        // 确认保存
+        editor.commit();
+    }
+
+    public boolean get_do_update() {
+        HashMap<String, String> data = new HashMap<String, String>();
+        if (sharedPreferences == null) {
+            return true;
+        }
+
+        return sharedPreferences.getBoolean("update", true);
+    }
 }
