@@ -8,8 +8,8 @@ import android.net.wifi.WifiManager;
  * Created by potter on 14-12-12.
  */
 public class GetLocalIP {
-    public static String getLocalIpAddress(WifiManager wifiManager) {
-        // WifiManager wifiManager = (WifiManager)context.getSystemService(Context.WIFI_SERVICE);
+    public static String getLocalIpAddress(Context context) {
+        WifiManager wifiManager = (WifiManager)context.getSystemService(context.WIFI_SERVICE);
         // 判断Wifi是否开启
         // wifiManager.isWifiEnabled();
 

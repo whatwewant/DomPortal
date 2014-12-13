@@ -97,7 +97,7 @@ public class MainActivity extends ActionBarActivity {
         ip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, GetLocalIP.getLocalIpAddress((WifiManager)getSystemService(Context.WIFI_SERVICE)), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, GetLocalIP.getLocalIpAddress(MainActivity.this), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -341,7 +341,7 @@ public class MainActivity extends ActionBarActivity {
                 loginStatus.setChecked(true);
                 loginStatus.setText(R.string.on);
 
-                ip.setText(GetLocalIP.getLocalIpAddress((WifiManager)getSystemService(Context.WIFI_SERVICE)));
+                ip.setText(GetLocalIP.getLocalIpAddress(MainActivity.this));
                 return ;
             }
 
@@ -449,7 +449,7 @@ public class MainActivity extends ActionBarActivity {
                 loginStatus.setChecked(true);
                 loginStatus.setText(R.string.on);
                 captureCode.setHint(R.string.on);
-                ip.setText(GetLocalIP.getLocalIpAddress((WifiManager)getSystemService(Context.WIFI_SERVICE)));
+                ip.setText(GetLocalIP.getLocalIpAddress(MainActivity.this));
                 return ;
             }
         }
