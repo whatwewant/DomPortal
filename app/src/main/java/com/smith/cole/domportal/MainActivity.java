@@ -9,36 +9,27 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.io.File;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import Service.CheckForUpdate;
-import Service.GetLocalIP;
 import Service.Login;
 import Service.LoginStatusRegex;
 import Service.MyHttpClient;
@@ -52,7 +43,6 @@ public class MainActivity extends ActionBarActivity {
 
     private Switch loginStatus;
     private boolean alreadyLogin;
-    private boolean loginStatusChange;
     private Handler loginStatusHandler;
     private Handler logoutStatusHandler;
     private Switch save;
@@ -88,7 +78,6 @@ public class MainActivity extends ActionBarActivity {
         loginStatus = (Switch)findViewById(R.id.loginStatus);
         alreadyLogin = false;
         loginStatus.setChecked(false);
-        loginStatusChange = false;
         save = (Switch)findViewById(R.id.save);
 
         username = (EditText)findViewById(R.id.username);
@@ -115,7 +104,7 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View view) {
                 new AlertDialog.Builder(MainActivity.this)
-                        .setTitle("QDU_EDU_CN Client")
+                        .setTitle(R.string.app_name + " new version")
                         .setMessage("检查更新?")
                         .setPositiveButton("确认", new DialogInterface.OnClickListener() {
                             @Override
@@ -179,7 +168,6 @@ public class MainActivity extends ActionBarActivity {
         loginStatus.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                loginStatusChange = true;
                 // 保存数据
                 if (save.isChecked()) {
                     dataImplement.store_username_password(getWidgetsInfo());
@@ -253,7 +241,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(MainActivity.this)
-                .setTitle("QDU_EDU_CN Client")
+                .setTitle(R.string.app_name)
                 .setMessage("确认退出?")
                 .setPositiveButton("确认", new DialogInterface.OnClickListener() {
                     @Override
