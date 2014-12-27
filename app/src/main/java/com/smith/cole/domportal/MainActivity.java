@@ -30,6 +30,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import Service.CheckForUpdate;
+import Service.GetLocalIP;
 import Service.Login;
 import Service.LoginStatusRegex;
 import Service.MyHttpClient;
@@ -93,7 +94,7 @@ public class MainActivity extends ActionBarActivity {
         ip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, getLocalIpAddress(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, GetLocalIP.getLocalIpAddress(MainActivity.this), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -374,7 +375,7 @@ public class MainActivity extends ActionBarActivity {
                 loginStatus.setChecked(true);
                 loginStatus.setText(R.string.on);
 
-                ip.setText(getLocalIpAddress());
+                ip.setText(GetLocalIP.getLocalIpAddress(getApplicationContext()));
                 return ;
             }
 
@@ -482,7 +483,7 @@ public class MainActivity extends ActionBarActivity {
                 loginStatus.setChecked(true);
                 loginStatus.setText(R.string.on);
                 captureCode.setHint(R.string.on);
-                ip.setText(getLocalIpAddress());
+                ip.setText(GetLocalIP.getLocalIpAddress(getApplicationContext()));
                 return ;
             }
         }
@@ -528,24 +529,6 @@ public class MainActivity extends ActionBarActivity {
         username.setText(data.get("username"));
         password.setText(data.get("password"));
         save.setChecked(data.get("save").equals("true"));
-    }
-
-    private String getLocalIpAddress() {
-        WifiManager wifiManager = (WifiManager)getSystemService(Context.WIFI_SERVICE);
-        // 判断Wifi是否开启
-        // wifiManager.isWifiEnabled();
-
-        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-        int ipAddress = wifiInfo.getIpAddress();
-        return intToIp(ipAddress);
-    }
-
-    private String intToIp(int i) {
-
-        return (i & 0xFF ) + "." +
-                ((i >> 8 ) & 0xFF) + "." +
-                ((i >> 16 ) & 0xFF) + "." +
-                ( i >> 24 & 0xFF) ;
     }
 
     @Override
