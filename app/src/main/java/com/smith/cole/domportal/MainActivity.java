@@ -382,6 +382,8 @@ public class MainActivity extends ActionBarActivity {
             if (!alreadyLogin && msg.what == 1) {
                 Toast.makeText(getApplicationContext(), "用户名 密码 验证码均不能为空", Toast.LENGTH_SHORT).show();
                 loginStatus.setChecked(false);
+                // 重新获取验证码
+                fetchCaptureImage();
                 return ;
             }
 
@@ -391,6 +393,8 @@ public class MainActivity extends ActionBarActivity {
                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                 loginStatus.setChecked(false);
                 loginStatus.setText(R.string.off);
+                // 重新获取验证码
+                fetchCaptureImage();
                 return ;
             }
         }
@@ -407,6 +411,8 @@ public class MainActivity extends ActionBarActivity {
             Toast.makeText(getApplicationContext(), String.valueOf(msg.obj) + "\n5秒后方可重新登陆!", Toast.LENGTH_LONG).show();
             captureCode.setHint(R.string.capturetips);
             loginStatus.setText(R.string.off);
+            // 重新获取验证码
+            fetchCaptureImage();
             /*
             loginStatus.setEnabled(false);
             try {
@@ -505,6 +511,7 @@ public class MainActivity extends ActionBarActivity {
         @Override
         public void handleMessage(Message msg) {
             captureImage.setImageBitmap((Bitmap) msg.obj);
+            captureCode.setText("");
         }
     }
 
